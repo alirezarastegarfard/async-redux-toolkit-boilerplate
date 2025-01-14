@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchUsers,
   selectAllUsers,
-  addUser,
-  removeUser,
-  updateUser,
+  addUserAsync,
+  removeUserAsync,
+  updateUserAsync,
 } from "./features/users/usersSlice";
 
 function App() {
@@ -25,18 +25,18 @@ function App() {
   const handleAddUser = () => {
     if (newUserName.trim()) {
       const newUser = { id: Date.now().toString(), name: newUserName };
-      dispatch(addUser(newUser));
+      dispatch(addUserAsync(newUser)); // Call the async addUser API
       setNewUserName("");
     }
   };
 
   const handleRemoveUser = (id) => {
-    dispatch(removeUser(id));
+    dispatch(removeUserAsync(id)); // Call the async removeUser API
   };
 
   const handleEditUser = () => {
     if (editUserId && editUserName.trim()) {
-      dispatch(updateUser({ id: editUserId, changes: { name: editUserName } }));
+      dispatch(updateUserAsync({ id: editUserId, name: editUserName })); // Call the async updateUser API
       setEditUserId(null);
       setEditUserName("");
     }
